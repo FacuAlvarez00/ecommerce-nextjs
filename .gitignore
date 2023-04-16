@@ -33,3 +33,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+https://demo.vercel.store/es
+https://fakestoreapi.com/products/12
