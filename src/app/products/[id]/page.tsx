@@ -1,25 +1,41 @@
 
-type Props = {
-  product: {
-    title: any
-  }
+type ProductProps = {
+  data: any
 }
 
- const product =  ({ product }: Props) => {
-
+const Product = ({ data }: ProductProps) => {
+  console.log(data)
   return (
-    <h1>{product.title}</h1>
-   
+    <>
+      <h1>hola</h1>
+      <h1>{data}</h1>
+    </>
   )
 }
 
+
+
+export const getStaticProps = async (context: any) => {
+  const res = await fetch(`https://fakestoreapi.com/products/${context.params.id}`)
+  const data = await res.json()
+  
+  return {
+    props: {data}
+      
+       
+  
+}
+}
+
+
 export const getStaticPaths = async () => {
-  const url = "https://fakestoreapi.com/products/"
-  const res = await fetch(url)
+
+  const res = await fetch("https://fakestoreapi.com/products/")
   const entries = await res.json()
-  const paths = entries.map((entry: any) => ({
-    params: { id: entry.id.toString() },
-  }))
+  const ids = entries.map((item: any) => (item.id))
+
+
+  const paths = ids.map((item: any) => ({params: { id: item.toString() }}))
   
   return {
     paths,
@@ -28,18 +44,9 @@ export const getStaticPaths = async () => {
   }
 }
 
-export const getStaticProps = async ({ params: {id} }: { params: {id: string} }) => {
-  const url = `https://fakestoreapi.com/products/${id}`
-  const res = await fetch(url)
-  const product = await res.json()
-  console.log('product:', product) 
 
-  return {
-    props: {
-      product
-       
-  }
-}
-}
 
-export default product
+
+
+
+export default Product
