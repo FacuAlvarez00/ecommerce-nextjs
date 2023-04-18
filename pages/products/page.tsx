@@ -1,7 +1,7 @@
 import "../globals.css"
 
 const fetchPost = () => {
-    return fetch("https://fakestoreapi.com/products/")
+    return fetch("https://fakestoreapi.com/products")
     .then(res => res.json())
 }
 
